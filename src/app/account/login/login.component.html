@@ -1,0 +1,192 @@
+<!-- auth-page wrapper -->
+<div
+  class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100"
+>
+  <div class="bg-overlay"></div>
+  <!-- auth-page content -->
+  <div class="auth-page-content overflow-hidden pt-lg-5">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-lg-5">
+          <div
+            class="card overflow-hidden card-bg-fill galaxy-border-none"
+            style="border-radius: 24px"
+          >
+            <div class="row g-0">
+              <div class="col-lg-12">
+                <div class="p-lg-5 p-4">
+                  <div class="text-center mb-5">
+                    <img src="assets/images/logo-dark.png" alt="" width="50%" class="mb-3" />
+                    <h5
+                      class="text-primary"
+                      style="font-family: nunito; font-weight: bold; font-size: 32px"
+                    >
+                      Login to account.
+                    </h5>
+                    <p class="text-muted" style="font-family: nunito">
+                      Please enter username and password to continue
+                    </p>
+                  </div>
+
+                  <div class="mt-4">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                      <div class="mb-4">
+                        <label for="username" class="form-label" style="font-family: nunito"
+                          >Username</label
+                        >
+                        <input
+                          style="font-family: nunito"
+                          type="text"
+                          class="form-control"
+                          id="username"
+                          placeholder="Enter username"
+                          formControlName="username"
+                          [ngClass]="{
+                            'is-invalid': submitted && f['username'].errors
+                          }"
+                        />
+                        @if (submitted && f['username'].errors) {
+                        <div class="invalid-feedback" align="left">
+                          @if(f['username'].errors['required']){
+                          <div>Username is required</div>
+                          }
+                        </div>
+                        }
+                      </div>
+
+                      <div class="mb-4">
+                        <label class="form-label" for="password-input" style="font-family: nunito"
+                          >Password</label
+                        >
+                        <div class="position-relative auth-pass-inputgroup mb-1">
+                          <input
+                            style="font-family: nunito"
+                            [type]="fieldTextType ? 'text' : 'password'"
+                            class="form-control pe-5 password-input"
+                            placeholder="Enter password"
+                            id="password-input"
+                            formControlName="password"
+                            [ngClass]="{
+                              'is-invalid': submitted && f['password'].errors
+                            }"
+                          />
+                          <button
+                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none"
+                            type="button"
+                            id="password-addon"
+                          >
+                            <i
+                              class="mdi align-middle"
+                              [ngClass]="{
+                                'mdi-eye-off-outline': !fieldTextType,
+                                'mdi-eye-outline': fieldTextType
+                              }"
+                              (click)="toggleFieldTextType()"
+                            ></i>
+                          </button>
+                          @if (submitted && f['password'].errors) {
+                          <div class="invalid-feedback">
+                            @if(f['password'].errors['required']){
+                            <span>Password is required</span>
+                            }
+                          </div>
+                          }
+                        </div>
+                        <div class="float-end" style="font-family: nunito">
+                          <a routerLink="/auth/pass-reset/cover" class="text-muted"
+                            >Forgot password?</a
+                          >
+                        </div>
+                      </div>
+
+                      <div class="mb-4">
+                        <label class="form-label" for="company-input" style="font-family: nunito"
+                          >Company</label
+                        >
+                        <div class="position-relative auth-pass-inputgroup mb-3">
+                          <ng-select
+                            [items]="data_company"
+                            bindLabel="label"
+                            formControlName="company"
+                          >
+                            <ng-template ng-optgroup-tmp let-item="item">
+                              <!-- {{item.value || 'Unnamed group'}} -->
+                              <span class="poppins-regular">{{
+                                item.value || 'Unnamed group'
+                              }}</span>
+                            </ng-template>
+                          </ng-select>
+                          @if (loginForm.status === 'INVALID' && !loginForm.value.company) {
+                          <div class="alert alert-danger mt-1" role="alert">
+                            Company is required
+                          </div>
+                          }
+                        </div>
+                      </div>
+
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="auth-remember-check"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="auth-remember-check"
+                          style="font-family: nunito"
+                          >Remember me</label
+                        >
+                      </div>
+
+                      <div class="mt-4 mb-4">
+                        <button
+                          [disabled]="isLoading"
+                          class="btn btn-primary w-100"
+                          type="submit"
+                          style="font-family: nunito"
+                        >
+                          @if (isLoading) {
+                          <div class="spinner-border spinner-border-sm text-light" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                          } @else {
+                          <span>Sign In</span>
+                          }
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end auth page content -->
+
+  <!-- footer -->
+  <footer class="footer galaxy-border-none">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <p class="mb-0" style="font-family: nunito">
+              &copy; {{ year }} PT Amerta Indah Otsuka.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- end Footer -->
+</div>
+<!-- end auth-page-wrapper -->

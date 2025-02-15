@@ -1,0 +1,167 @@
+<div class="row project-wrapper">
+  <div class="col-xxl-12">
+    <div class="row">
+      <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p class="fw-medium text-muted mb-0">New Apps Request</p>
+                <h2 class="mt-4 ff-secondary fw-semibold">
+                  <span class="counter-value" data-target="234">{{ dataCount.new_apps || 0 }}</span>
+                </h2>
+                <br />
+              </div>
+              <div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-info-subtle text-info rounded-circle fs-4">
+                    <i class="ri-group-line"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card body -->
+        </div>
+        <!-- end card-->
+      </div>
+      <!--end col-->
+      <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p class="fw-medium text-muted mb-0">Change App Request</p>
+                <h2 class="mt-4 ff-secondary fw-semibold">
+                  <span class="counter-value" data-target="64.5">{{
+                    dataCount.change_request || 0
+                  }}</span>
+                </h2>
+                <br />
+              </div>
+              <div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-warning-subtle text-warning rounded-circle fs-4">
+                    <i class="mdi mdi-timer-sand"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card body -->
+        </div>
+      </div>
+      <!--end col-->
+      <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p class="fw-medium text-muted mb-0">Project Delivered</p>
+                <h2 class="mt-4 ff-secondary fw-semibold">
+                  <span class="counter-value" data-target="116.21">{{
+                    dataCount.completed || 0
+                  }}</span>
+                </h2>
+                <br />
+              </div>
+              <div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-success-subtle text-success rounded-circle fs-4">
+                    <i class="ri-line-chart-line"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card body -->
+        </div>
+      </div>
+      <!--end col-->
+      <div class="col-xxl-3 col-sm-6">
+        <div class="card card-animate">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p class="fw-medium text-muted mb-0">Project Pending</p>
+                <h2 class="mt-4 ff-secondary fw-semibold">
+                  <span class="counter-value" data-target="14.84">{{
+                    dataCount.pending || 0
+                  }}</span>
+                </h2>
+                <br />
+              </div>
+              <div>
+                <div class="avatar-sm flex-shrink-0">
+                  <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-4">
+                    <i class="ri-history-fill"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card body -->
+        </div>
+      </div>
+
+      <div class="col-xxl-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
+              <div>
+                <h3>Service Requisition Flow</h3>
+                <span>Here's step of request flow from creation to finalization.</span>
+              </div>
+              <a routerLink="/request/add" class="btn btn-primary">Made your request here</a>
+            </div>
+
+            @for(item of modifiedDataMasterProjectFlow;track $index){
+            <div
+              class="projectFlowDashboardWrapper justify-content-between"
+              [ngClass]="{
+                'flex-row-reverse': $index % 2 !== 0,
+              }"
+            >
+              @for (item2 of item; track item2.id) {
+              <div class="projectFlowDashboardWrapper__item">
+                <span class="projectFlowDashboardWrapper__item__order">
+                  {{ item2.id }}
+                </span>
+                <h4 class="projectFlowDashboardWrapper__item__title mb-0">
+                  {{ item2.flow }}
+                </h4>
+                <span class="projectFlowDashboardWrapper__item__subtitle">
+                  {{ item2.pic }}
+                </span>
+
+                @if (item2.id === 4 || item2.id === 8) {
+                  <div class="projectFlowDashboardWrapper__item__connect_down"></div>
+                }
+              </div>
+              @if (item2.id !== 4 && item2.id !== 8) {
+              <div class="projectFlowDashboardWrapper__gap">
+                @if (item2.id !== 10) {
+                  <div class="projectFlowDashboardWrapper__gap__connect"></div>
+                }
+              </div>
+              } } @if (item.length < 4) { @for (numb of generateArray(4 - item.length); track
+              $index) {
+              <div class="projectFlowDashboardWrapper__transparentItem"></div>
+              @if ($index !== 4 - item.length - 1) {
+              <div class="projectFlowDashboardWrapper__gap"></div>
+              } } }
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!-- end row -->
+    <div></div>
+    <!-- end row -->
+  </div>
+  <!-- end col -->
+
+  <!-- end col -->
+</div>

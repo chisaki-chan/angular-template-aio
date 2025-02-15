@@ -1,0 +1,71 @@
+[
+    {
+        "role": [
+            "Self-Services", "Super-Admin"
+        ],
+        "status": "submit",
+        "action": "REQUEST-LIST-BTN-DELETE"
+    },
+    {
+        "action": "REQUEST-LIST-BTN-ADD"
+    },
+    {
+        "role": "Dept Head",
+        "action": "REQUEST-LIST-BTN-ADD"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-BTN-SAVE"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-BTN-REMOVE-TECHNICIAN"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-BTN-ADD-TECHNICIAN"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-BTN-ADD-SOLUTION"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-BTN-GO-TO-PROJECT"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "REQUEST-DETAIL-CREATE-PROJECT"
+    },
+    {
+        "status": null,
+        "action": "/request/list"
+    },
+    {
+        "role": [
+            "Technician"
+        ],
+        "status": null,
+        "action": "/project/list"
+    }
+
+    
+]

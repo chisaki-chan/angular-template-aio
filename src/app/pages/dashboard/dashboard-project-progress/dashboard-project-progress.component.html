@@ -1,0 +1,179 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card card-height-100">
+      <div class="card-header d-flex align-items-center">
+        <h4 class="card-title flex-grow-1 mb-0">Active Projects</h4>
+      </div>
+      <!-- end cardheader -->
+      <div class="card-body">
+        <div class="table-responsive table-card">
+          <table class="table table-nowrap table-centered align-middle">
+            <thead class="bg-light text-muted">
+              <tr>
+                <th scope="col">Apps Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Progress</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+              </tr>
+              <!-- end tr -->
+            </thead>
+            <!-- thead -->
+
+            <tbody>
+              <tr *ngFor="let item of data">
+                <td class="fw-medium">{{ item.project_name }}</td>
+                <td>{{ item.type || 'NA' }}</td>
+                <td class="text-muted">{{ mainService.formatDate(item.created_at) }}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-1 text-muted fs-13">
+                      {{ item.percent_done || 0 }}%
+                    </div>
+                    <div class="progress progress-sm flex-grow-1">
+                      <div
+                        class="progress-bar bg-primary rounded"
+                        role="progressbar"
+                        [style]="{ width: item.percent_done || 0 + '%' }"
+                        aria-valuenow="{item.percent_done || 0}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ item.cost | currency : 'IDR' }}</td>
+                <td class="text-muted" [innerHTML]="service.formatStatusProject(item.state)"></td>
+              </tr>
+              @if (!data.length) {
+              <tr>
+                <td colspan="6" class="text-center">No data available</td>
+              </tr>
+              }
+            </tbody>
+            <!-- end tbody -->
+          </table>
+          <!-- end table -->
+        </div>
+
+        <div class="align-items-center mt-xl-3 mt-4 justify-content-between d-flex">
+          <div class="flex-shrink-0">
+            <div class="text-muted">
+              Showing <span class="fw-semibold">5</span> of
+              <span class="fw-semibold">25</span> Results
+            </div>
+          </div>
+          <ul class="pagination pagination-separated pagination-sm mb-0">
+            <li class="page-item disabled">
+              <a href="#" class="page-link">←</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">1</a>
+            </li>
+            <li class="page-item active">
+              <a href="#" class="page-link">2</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">3</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">→</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card card-height-100">
+      <div class="card-header d-flex align-items-center">
+        <h4 class="card-title flex-grow-1 mb-0">Your Projects' Progress</h4>
+      </div>
+      <!-- end cardheader -->
+      <div class="card-body">
+        <div class="table-responsive table-card">
+          <table class="table table-centered align-middle table-striped-columns">
+            <thead class="bg-light text-muted">
+              <tr>
+                <th scope="col" class="align-middle col-4">Project Name</th>
+                <th
+                  scope="col"
+                  class="align-middle text-center"
+                  *ngFor="let data of dataMasterProjectFlow"
+                >
+                  {{ data.flow }}
+                </th>
+              </tr>
+              <!-- end tr -->
+            </thead>
+            <!-- thead -->
+
+            <tbody>
+              <tr *ngFor="let project of projectFlowState">
+                <td class="col-4">{{ project.project_name }}</td>
+                <td *ngFor="let flow of dataMasterProjectFlow; let i = index" class="text-center">
+                  <ng-container *ngIf="project.flow_ids.includes(flow.id); else notDone">
+                    <i
+                      *ngIf="project.state[i] == 'Done'"
+                      class="ri-checkbox-circle-fill text-success fs-3"
+                      title="Done"
+                    ></i>
+                    <i
+                      *ngIf="project.state[i] == 'Progress'"
+                      class="ri-history-fill text-warning fs-3"
+                      title="Progress"
+                    ></i>
+                    <i
+                      *ngIf="project.state[i] == 'Pending' || !project.state[i]"
+                      class="ri-close-circle-fill text-danger fs-3"
+                      title="Pending"
+                    ></i>
+                  </ng-container>
+                  <ng-template #notDone>
+                    <i class="ri-close-circle-fill text-danger fs-3"></i>
+                  </ng-template>
+                </td>
+              </tr>
+              @if (!projectFlowState.length) {
+              <tr>
+                <td colspan="12" class="text-center">No data available</td>
+              </tr>
+              }
+            </tbody>
+            <!-- end tbody -->
+          </table>
+          <!-- end table -->
+        </div>
+
+        <div class="align-items-center mt-xl-3 mt-4 justify-content-between d-flex">
+          <div class="flex-shrink-0">
+            <div class="text-muted">
+              Showing <span class="fw-semibold">5</span> of
+              <span class="fw-semibold">25</span> Results
+            </div>
+          </div>
+          <ul class="pagination pagination-separated pagination-sm mb-0">
+            <li class="page-item disabled">
+              <a href="#" class="page-link">←</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">1</a>
+            </li>
+            <li class="page-item active">
+              <a href="#" class="page-link">2</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">3</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">→</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
